@@ -18,11 +18,11 @@ const App = () => {
             <div className='ui container'>
                 <Header />
                 <Switch>
-                <Route path='/' exact component={Streamlist} />
-                <Route path='/new' exact component={Streamcreate} />
-                <Route path='/delete/:id' exact component={Streamdelete} />
-                <Route path='/edit/:id' exact component={Streamedit} />
-                <Route path='/:id' exact component={Streamshow} />
+                    <Route path='/' exact component={Streamlist} />
+                    <Route path='/new' exact component={Streamcreate} />
+                    <Route path='/delete/:id' exact component={Streamdelete} />
+                    <Route path='/edit/:id' exact component={Streamedit} />
+                    <Route path='/:id' exact component={Streamshow} />
                 </Switch>
                 
             </div>
