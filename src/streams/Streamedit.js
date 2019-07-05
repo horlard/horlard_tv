@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import _ from 'lodash';
 import {fetchStream,editStream} from '../actions';
 import StreamForm from './streamForm';
+import Loader from '../components/loader';
 class Streamedit extends React.Component {
     componentDidMount() {
         this.props.fetchStream(this.props.match.params.id)
@@ -15,13 +16,17 @@ class Streamedit extends React.Component {
         return (
             <div>
                 <h3>Edit a Stream</h3>
-                <StreamForm onSubmit={this.onSubmit} initialValues={_.pick(this.props.stream,'title','description')}/>
+                {
+                    this.props.isSignedIn ? <StreamForm onSubmit={this.onSubmit} initialValues={_.pick(this.props.stream,'title','description')}/>
+                     : <Loader />
+                }
+                
             </div>
         )
     }
     
 }
 const mapStateToProps = (state,ownProps) => {
-    return {stream:state.streams[ownProps.match.params.id]}
+    return {stream:state.streams[ownProps.match.params.id],isSignedIn: state.auth.isSignedin}
 }
 export default connect(mapStateToProps,{fetchStream,editStream})(Streamedit);

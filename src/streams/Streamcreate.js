@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import {createStream} from '../actions';
 import StreamForm from './streamForm';
-
+import Loader from '../components/loader';
 
 class Streamcreate extends React.Component {
 
@@ -19,13 +19,22 @@ class Streamcreate extends React.Component {
         return (
             <div>
                 <h3>Create a Stream</h3>
-                <StreamForm onSubmit={this.onFormSubmit}/>
+                {
+                    this.props.isSignedIn ? <StreamForm onSubmit={this.onFormSubmit}/>
+                     : <Loader/>
+                }
+                
+                
             </div>
+            
         )
     }
 }
 
 
+const mapStateToProps = state => {
+    return {isSignedIn: state.auth.isSignedin}
+}
 
 
-export default connect(null,{createStream})(Streamcreate)
+export default connect(mapStateToProps,{createStream})(Streamcreate)

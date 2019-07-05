@@ -32,7 +32,7 @@ class Streamshow extends Component {
         this.player.load();
     }
     render() {
-        if(!this.props.stream) {
+        if(!this.props.stream || !this.props.isSignedIn) {
             return <div>Loading</div>
         }
 
@@ -47,7 +47,10 @@ class Streamshow extends Component {
     }
 }
 const mapStateToProps = (state,ownProps) => {
-    return {stream: state.streams[ownProps.match.params.id]}
+    return {
+        stream: state.streams[ownProps.match.params.id],
+        isSignedIn : state.auth.isSignedIn
+    }
 }
 
 export default connect(mapStateToProps,{fetchStream})(Streamshow);

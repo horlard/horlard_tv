@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import {fetchStreams} from '../actions';
+import Loader from '../components/loader';
 
 
 class Streamlist extends React.Component {
@@ -62,7 +63,12 @@ class Streamlist extends React.Component {
         return (
             <div>
                 <h2>Streams</h2>
-                <div className='ui celled list'>{this.renderList()}</div>
+                <div className='ui celled list'>
+                {
+                    this.props.isSignedin ? this.renderList()
+                     : <Loader/>
+                }
+                    </div>
                 {this.renderCreate()}
             </div>
         )
